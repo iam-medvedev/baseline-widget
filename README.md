@@ -1,5 +1,7 @@
 # Baseline Widget
 
+https://baseline.js.org
+
 Embeddable SVG widgets for displaying [Baseline](https://web.dev/baseline/) status of web platform features. This service generates responsive and static SVG widgets that can be embedded in documentation, blog posts, and README files.
 
 ## Widget Types
@@ -7,12 +9,12 @@ Embeddable SVG widgets for displaying [Baseline](https://web.dev/baseline/) stat
 ### Responsive Widgets
 
 - Adaptive sizing
-- URL format: `/responsive/{feature-id}.svg`
+- URL format: `https://baseline.js.org/features/responsive/{feature-id}.svg`
 
 ### Static Widgets
 
 - Fixed sizing
-- URL format: `/static/{feature-id}.svg`
+- URL format: `https://baseline.js.org/features/static/{feature-id}.svg`
 
 ## Data Sources
 
