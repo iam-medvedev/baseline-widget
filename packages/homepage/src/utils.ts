@@ -1,7 +1,9 @@
 /** Returns URL with feature SVG */
 export function getFeatureURL(type: "responsive" | "static", name: string) {
   const url = new URL(window.location.toString());
-  url.pathname = `/features/${type}/${name}.svg`;
+
+  const basePath = url.pathname.replace(/\/$/, "");
+  url.pathname = `${basePath}/features/${type}/${name}.svg`;
 
   return url.toString();
 }
