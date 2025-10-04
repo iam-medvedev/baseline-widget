@@ -1,0 +1,13 @@
+{
+  "name": "baseline-widget",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "./packages/*"
+  ],
+  "scripts": {
+    "build:features": "bun run --filter '@baseline-widget/generator' --elide-lines=0 build",
+    "build:homepage": "bun run --filter '@baseline-widget/homepage' --elide-lines=0 build",
+    "dev:homepage": "bun run --filter '@baseline-widget/homepage' --elide-lines=0 dev"
+  }
+}
