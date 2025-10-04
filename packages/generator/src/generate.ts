@@ -20,8 +20,7 @@ await rmdir(outdir, { recursive: true }).catch(() => {});
 await mkdir(outdirResponsive, { recursive: true });
 await mkdir(outdirStatic, { recursive: true });
 
-// FIXME
-const featureIds = Object.keys(features).slice(0, 2);
+const featureIds = Object.keys(features);
 const page = await Browser.createPageWithContent(createHTML(featureIds));
 
 // Main processing

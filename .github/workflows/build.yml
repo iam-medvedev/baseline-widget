@@ -1,0 +1,46 @@
+name: build
+
+on: workflow_dispatch
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: ".bun-version"
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Generate features
+        run: bun run build:features
+
+      - name: Generate homepage
+        run: bun run build:homepage
+
+      - name: Prepare dist
+        run: |
+          mkdir -p ./dist
+          mv ./homepage/* ./dist/
+          mv ./features/ ./dist/
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./dist
+          branch: pages
+          token: ${{ secrets.GITHUB_TOKEN }}
