@@ -4,7 +4,14 @@ import { Search } from "./Search";
 export function App() {
   return (
     <main>
-      <h1>Baseline Status Widgets</h1>
+      <h1>
+        <img
+          src="https://web-platform-dx.github.io/web-features/assets/img/baseline-widely-icon.svg"
+          width={48}
+          height={26}
+        />{" "}
+        Baseline Status Widgets
+      </h1>
 
       <p>
         Embeddable SVG widgets showing{" "}
