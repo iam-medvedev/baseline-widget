@@ -183,15 +183,23 @@ function Preview({
         This is how the {settings.theme} {settings.sizing} widget will appear:
       </p>
 
-      <img
-        alt={altText}
-        src={widgetURL}
-        style={
-          settings.sizing === "responsive"
-            ? { width: "100%", height: "auto" }
-            : {}
-        }
-      />
+      <div
+        style={{
+          backgroundColor: settings.theme === "dark" ? "#1a242f" : undefined,
+          borderRadius: 10,
+          padding: 10,
+        }}
+      >
+        <img
+          alt={altText}
+          src={widgetURL}
+          style={
+            settings.sizing === "responsive"
+              ? { width: "100%", height: "auto" }
+              : {}
+          }
+        />
+      </div>
     </>
   );
 }
