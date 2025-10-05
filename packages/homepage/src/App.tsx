@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { Search } from "./Search";
-import { getFeatureURL } from "./utils";
 
 export function App() {
   return (
@@ -12,8 +11,9 @@ export function App() {
         <a href="https://web.dev/baseline/" target="_blank">
           Baseline
         </a>{" "}
-        status for web platform features. Simply copy the embed code and add it
-        to your documentation, blog posts, or project README files.
+        status for web platform features. Supports adaptive theming, responsive
+        sizing, and multiple theme options. Simply copy the embed code and add
+        it to your documentation, blog posts, or project README files.
       </p>
 
       <p>
@@ -35,15 +35,42 @@ export function App() {
       <hr />
 
       <h2>Widget Options</h2>
-      <p>Choose between two widget styles:</p>
+      <p>Each feature now has 6 variants combining themes and sizing:</p>
 
-      <h4>Responsive (Recommended)</h4>
-      <p>Adapts to your site's theme and layout</p>
-      <code>{getFeatureURL("responsive", "_FEATURE_")}</code>
+      <h4>Themes</h4>
+      <ul>
+        <li>
+          <strong>Adaptive</strong> — Automatically adapts to system theme
+          (recommended)
+        </li>
+        <li>
+          <strong>Light</strong> — Fixed light theme
+        </li>
+        <li>
+          <strong>Dark</strong> — Fixed dark theme
+        </li>
+      </ul>
 
-      <h4>Static</h4>
-      <p>Fixed styling, always looks the same</p>
-      <code>{getFeatureURL("static", "_FEATURE_")}</code>
+      <h4>Sizing</h4>
+      <ul>
+        <li>
+          <strong>Responsive</strong> — Adapts to container size
+        </li>
+        <li>
+          <strong>Static</strong> — Fixed dimensions
+        </li>
+      </ul>
+
+      <h4>URL Examples</h4>
+      <p>Responsive Adaptive (recommended):</p>
+      <code>
+        https://baseline.js.org/features/<i>FEATURE</i>/responsive-adaptive.svg
+      </code>
+
+      <p>Static Light theme:</p>
+      <code>
+        https://baseline.js.org/features/<i>FEATURE</i>/static-light.svg
+      </code>
 
       <hr />
 

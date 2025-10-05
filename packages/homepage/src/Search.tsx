@@ -10,13 +10,12 @@ function CodeExample({ option }: { option: Option }) {
     <>
       <h3>Embed Code</h3>
       <p>Copy this HTML to embed the widget in your project:</p>
+
+      <h4>Recommended: Responsive Adaptive</h4>
+      <p>Automatically adapts to your site's theme and layout:</p>
       <Highlight
         theme={themes.github}
-        code={`<!-- Responsive -->
-<img src="${getFeatureURL("responsive", option.value)}" alt="${getFeatureAlt(option.label)}" style="width: 100%; height: auto;" />
-
-<!-- Static -->
-<img src="${getFeatureURL("static", option.value)}" alt="${getFeatureAlt(option.label)}" />`}
+        code={`<img src="${getFeatureURL("responsive", option.value, "adaptive")}" alt="${getFeatureAlt(option.label)}" style="width: 100%; height: auto;" />`}
         language="html"
       >
         {({ style, tokens, getLineProps, getTokenProps }) => (
@@ -34,14 +33,39 @@ function CodeExample({ option }: { option: Option }) {
         )}
       </Highlight>
 
-      <p>Or this Markdown code:</p>
+      <h4>All Available Options</h4>
       <Highlight
         theme={themes.github}
-        code={`<!-- Responsive -->
-![${getFeatureAlt(option.label)}](${getFeatureURL("responsive", option.value)})
+        code={`<!-- Responsive variants -->
+<img src="${getFeatureURL("responsive", option.value, "adaptive")}" alt="${getFeatureAlt(option.label)}" style="width: 100%; height: auto;" />
+<img src="${getFeatureURL("responsive", option.value, "light")}" alt="${getFeatureAlt(option.label)}" style="width: 100%; height: auto;" />
+<img src="${getFeatureURL("responsive", option.value, "dark")}" alt="${getFeatureAlt(option.label)}" style="width: 100%; height: auto;" />
 
-<!-- Static -->
-![${getFeatureAlt(option.label)}](${getFeatureURL("static", option.value)})`}
+<!-- Static variants -->
+<img src="${getFeatureURL("static", option.value, "adaptive")}" alt="${getFeatureAlt(option.label)}" />
+<img src="${getFeatureURL("static", option.value, "light")}" alt="${getFeatureAlt(option.label)}" />
+<img src="${getFeatureURL("static", option.value, "dark")}" alt="${getFeatureAlt(option.label)}" />`}
+        language="html"
+      >
+        {({ style, tokens, getLineProps, getTokenProps }) => (
+          <pre>
+            <code style={style}>
+              {tokens.map((line, i) => (
+                <div key={i} {...getLineProps({ line })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token })} />
+                  ))}
+                </div>
+              ))}
+            </code>
+          </pre>
+        )}
+      </Highlight>
+
+      <p>Markdown (recommended):</p>
+      <Highlight
+        theme={themes.github}
+        code={`![${getFeatureAlt(option.label)}](${getFeatureURL("responsive", option.value, "adaptive")})`}
         language="markdown"
       >
         {({ style, tokens, getLineProps, getTokenProps }) => (
@@ -66,10 +90,10 @@ function Preview({ option }: { option: Option }) {
   return (
     <>
       <h3>Preview</h3>
-      <p>This is how the widget will appear in your project:</p>
+      <p>This is how the adaptive widget will appear in your project:</p>
       <img
         alt={getFeatureAlt(option.label)}
-        src={getFeatureURL("static", option.value)}
+        src={getFeatureURL("responsive", option.value, "adaptive")}
         style={{ width: "100%", height: "auto" }}
       />
     </>
@@ -97,8 +121,8 @@ export function Search() {
 
       {selectedOption ? (
         <>
-          <CodeExample option={selectedOption} />
           <Preview option={selectedOption} />
+          <CodeExample option={selectedOption} />
         </>
       ) : null}
     </>

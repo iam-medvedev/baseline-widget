@@ -1,9 +1,13 @@
 /** Returns URL with feature SVG */
-export function getFeatureURL(type: "responsive" | "static", name: string) {
+export function getFeatureURL(
+  type: "responsive" | "static", 
+  name: string, 
+  theme: "adaptive" | "light" | "dark" = "adaptive"
+) {
   const url = new URL(window.location.toString());
 
   const basePath = url.pathname.replace(/\/$/, "");
-  url.pathname = `${basePath}/features/${type}/${name}.svg`;
+  url.pathname = `${basePath}/features/${name}/${type}-${theme}.svg`;
 
   return url.toString();
 }

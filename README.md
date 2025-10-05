@@ -2,19 +2,33 @@
 
 https://baseline.js.org
 
-Embeddable SVG widgets for displaying [Baseline](https://web.dev/baseline/) status of web platform features. This service generates responsive and static SVG widgets that can be embedded in documentation, blog posts, and README files.
+Embeddable SVG widgets for displaying [Baseline](https://web.dev/baseline/) status of web platform features. This service generates adaptive, responsive, and static SVG widgets with multiple theme options that can be embedded in documentation, blog posts, and README files.
 
 ## Widget Types
 
-### Responsive Widgets
+The service now generates 6 variants for each feature, combining three themes with two sizing options:
 
-- Adaptive sizing
-- URL format: `https://baseline.js.org/features/responsive/{feature-id}.svg`
+### Themes
 
-### Static Widgets
+- **Adaptive** — Automatically adapts to the user's system theme (light/dark)
+- **Light** — Fixed light theme
+- **Dark** — Fixed dark theme
 
-- Fixed sizing
-- URL format: `https://baseline.js.org/features/static/{feature-id}.svg`
+### Sizing Options
+
+- **Responsive** — Adapts to container size
+- **Static** — Fixed dimensions
+
+### URL Structure
+
+Widgets are organized by feature ID with the following naming convention:
+
+- `https://baseline.js.org/features/{feature-id}/responsive-adaptive.svg`
+- `https://baseline.js.org/features/{feature-id}/responsive-light.svg`
+- `https://baseline.js.org/features/{feature-id}/responsive-dark.svg`
+- `https://baseline.js.org/features/{feature-id}/static-adaptive.svg`
+- `https://baseline.js.org/features/{feature-id}/static-light.svg`
+- `https://baseline.js.org/features/{feature-id}/static-dark.svg`
 
 ## Data Sources
 
