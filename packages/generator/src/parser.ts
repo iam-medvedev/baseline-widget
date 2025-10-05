@@ -19,7 +19,7 @@ export async function parseFeature(featureId: string, page: Page) {
       return !loadingText;
     },
     { selector },
-    { timeout: 2000 }
+    { timeout: 15000 }
   );
 
   const result = await page.evaluate(
