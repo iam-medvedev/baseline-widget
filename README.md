@@ -36,7 +36,7 @@ This project builds upon these open source initiatives:
 
 - **[web-features](https://github.com/web-platform-dx/web-features)** — Comprehensive database of web platform features
 - **[baseline-status](https://github.com/web-platform-dx/baseline-status)** — Web component for Baseline status display
-- **[webstatus.dev](https://github.com/GoogleChrome/webstatus.dev/)** — Web platform feature database and status tracker
+- **[Web Platform Status](https://github.com/GoogleChrome/webstatus.dev/)** — Web platform feature database and status tracker
 - **[Baseline](https://web.dev/baseline/)** — Web standards community initiative for identifying stable features
 
 ## License

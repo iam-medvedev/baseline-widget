@@ -108,7 +108,7 @@ export function App() {
               href="https://github.com/GoogleChrome/webstatus.dev/"
               target="_blank"
             >
-              webstatus.dev
+              Web Platform Status
             </a>
           </strong>{" "}
           — Web platform feature database and status tracker
