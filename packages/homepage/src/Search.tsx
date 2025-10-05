@@ -190,15 +190,32 @@ function Preview({
           padding: 10,
         }}
       >
-        <img
-          alt={altText}
-          src={widgetURL}
+        <div
           style={
             settings.sizing === "responsive"
-              ? { width: "100%", height: "auto" }
+              ? {
+                  resize: "both",
+                  overflow: "auto",
+                  border: "1px solid var(--links)",
+                  minWidth: 100,
+                  minHeight: 100,
+                  maxWidth: "100%",
+                  maxHeight: 400,
+                  borderRadius: 8,
+                }
               : {}
           }
-        />
+        >
+          <img
+            alt={altText}
+            src={widgetURL}
+            style={
+              settings.sizing === "responsive"
+                ? { width: "100%", height: "100%" }
+                : {}
+            }
+          />
+        </div>
       </div>
     </>
   );
@@ -211,7 +228,7 @@ export function Search() {
     theme: "adaptive",
     sizing: "static",
     format: "html",
-    link: "without-link",
+    link: "with-link",
   });
 
   return (
