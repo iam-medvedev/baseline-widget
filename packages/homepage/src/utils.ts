@@ -16,3 +16,8 @@ export function getFeatureURL(
 export function getFeatureAlt(label: string) {
   return `Baseline Status: ${label}`;
 }
+
+/** Returns webstatus.dev feature link URL */
+export function getFeatureLink(featureId: string) {
+  return `https://webstatus.dev/features/${featureId}`;
+}

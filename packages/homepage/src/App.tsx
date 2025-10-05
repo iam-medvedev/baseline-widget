@@ -97,6 +97,17 @@ export function App() {
         </li>
         <li>
           <strong>
+            <a
+              href="https://github.com/GoogleChrome/webstatus.dev/"
+              target="_blank"
+            >
+              webstatus.dev
+            </a>
+          </strong>{" "}
+          — Web platform feature database and status tracker
+        </li>
+        <li>
+          <strong>
             <a href="https://web.dev/baseline/" target="_blank">
               Baseline
             </a>

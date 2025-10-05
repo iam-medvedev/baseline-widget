@@ -2,13 +2,14 @@ import { useState } from "react";
 import Select from "react-select";
 import { Highlight, themes } from "prism-react-renderer";
 import { suspend } from "suspend-react";
-import { getFeatureURL, getFeatureAlt } from "./utils";
+import { getFeatureURL, getFeatureAlt, getFeatureLink } from "./utils";
 import { type Option, getSearchOptions } from "./options";
 
 type WidgetSettings = {
   theme: "adaptive" | "light" | "dark";
   sizing: "responsive" | "static";
   format: "html" | "markdown";
+  link: "with-link" | "without-link";
 };
 
 function WidgetForm({
@@ -73,6 +74,23 @@ function WidgetForm({
             <option value="markdown">Markdown</option>
           </select>
         </div>
+
+        <div>
+          <label htmlFor="link">Feature Link:</label>
+          <select
+            id="link"
+            value={settings.link}
+            onChange={(e) =>
+              onSettingsChange({
+                ...settings,
+                link: e.target.value as WidgetSettings["link"],
+              })
+            }
+          >
+            <option value="without-link">Without Link</option>
+            <option value="with-link">With Link</option>
+          </select>
+        </div>
       </div>
     </>
   );
@@ -91,13 +109,26 @@ function CodeExample({
     settings.theme
   );
   const altText = getFeatureAlt(option.label);
+  const featureLink = getFeatureLink(option.value);
 
-  const htmlCode =
-    settings.sizing === "responsive"
-      ? `<img src="${widgetURL}" alt="${altText}" style="width: 100%; height: auto;" />`
-      : `<img src="${widgetURL}" alt="${altText}" />`;
+  let htmlCode: string;
+  let markdownCode: string;
 
-  const markdownCode = `![${altText}](${widgetURL})`;
+  if (settings.link === "with-link") {
+    htmlCode =
+      settings.sizing === "responsive"
+        ? `<a href="${featureLink}" target="_blank" rel="noopener noreferrer"><img src="${widgetURL}" alt="${altText}" style="width: 100%; height: auto;" /></a>`
+        : `<a href="${featureLink}" target="_blank" rel="noopener noreferrer"><img src="${widgetURL}" alt="${altText}" /></a>`;
+
+    markdownCode = `[![${altText}](${widgetURL})](${featureLink})`;
+  } else {
+    htmlCode =
+      settings.sizing === "responsive"
+        ? `<img src="${widgetURL}" alt="${altText}" style="width: 100%; height: auto;" />`
+        : `<img src="${widgetURL}" alt="${altText}" />`;
+
+    markdownCode = `![${altText}](${widgetURL})`;
+  }
 
   const codeToShow = settings.format === "html" ? htmlCode : markdownCode;
   const language = settings.format === "html" ? "html" : "markdown";
@@ -172,6 +203,7 @@ export function Search() {
     theme: "adaptive",
     sizing: "static",
     format: "html",
+    link: "without-link",
   });
 
   return (
