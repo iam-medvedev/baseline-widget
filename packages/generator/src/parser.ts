@@ -7,6 +7,21 @@ import { componentName, featureAttrName } from "./constants";
  */
 export async function parseFeature(featureId: string, page: Page) {
   const selector = `${componentName}[${featureAttrName}="${featureId}"]`;
+
+  // Wait for the component to be fully loaded and rendered
+  await page.waitForFunction(
+    ({ selector }) => {
+      const element = document.querySelector(selector);
+      if (!element?.shadowRoot) return false;
+
+      // Check if the component has finished loading
+      const loadingText = element.shadowRoot.textContent?.includes("Loading");
+      return !loadingText;
+    },
+    { selector },
+    { timeout: 2000 }
+  );
+
   const result = await page.evaluate(
     async ({ selector }) => {
       const element = document.querySelector(selector);

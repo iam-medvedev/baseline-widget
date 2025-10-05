@@ -33,6 +33,31 @@ function CodeExample({ option }: { option: Option }) {
           </pre>
         )}
       </Highlight>
+
+      <p>Or this Markdown code:</p>
+      <Highlight
+        theme={themes.github}
+        code={`<!-- Responsive -->
+![${getFeatureAlt(option.label)}](${getFeatureURL("responsive", option.value)})
+
+<!-- Static -->
+![${getFeatureAlt(option.label)}](${getFeatureURL("static", option.value)})`}
+        language="markdown"
+      >
+        {({ style, tokens, getLineProps, getTokenProps }) => (
+          <pre>
+            <code style={style}>
+              {tokens.map((line, i) => (
+                <div key={i} {...getLineProps({ line })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token })} />
+                  ))}
+                </div>
+              ))}
+            </code>
+          </pre>
+        )}
+      </Highlight>
     </>
   );
 }
