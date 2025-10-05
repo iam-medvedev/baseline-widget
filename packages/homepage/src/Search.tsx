@@ -5,69 +5,114 @@ import { suspend } from "suspend-react";
 import { getFeatureURL, getFeatureAlt } from "./utils";
 import { type Option, getSearchOptions } from "./options";
 
-function CodeExample({ option }: { option: Option }) {
+type WidgetSettings = {
+  theme: "adaptive" | "light" | "dark";
+  sizing: "responsive" | "static";
+  format: "html" | "markdown";
+};
+
+function WidgetForm({
+  settings,
+  onSettingsChange,
+}: {
+  settings: WidgetSettings;
+  onSettingsChange: (settings: WidgetSettings) => void;
+}) {
   return (
     <>
-      <h3>Embed Code</h3>
-      <p>Copy this HTML to embed the widget in your project:</p>
+      <h4>Widget Settings</h4>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <div>
+          <label htmlFor="theme">Theme:</label>
+          <select
+            id="theme"
+            value={settings.theme}
+            onChange={(e) =>
+              onSettingsChange({
+                ...settings,
+                theme: e.target.value as WidgetSettings["theme"],
+              })
+            }
+          >
+            <option value="adaptive">Adaptive</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
 
-      <h4>Recommended: Responsive Adaptive</h4>
-      <p>Automatically adapts to your site's theme and layout:</p>
-      <Highlight
-        theme={themes.github}
-        code={`<img src="${getFeatureURL("responsive", option.value, "adaptive")}" alt="${getFeatureAlt(option.label)}" style="width: 100%; height: auto;" />`}
-        language="html"
-      >
-        {({ style, tokens, getLineProps, getTokenProps }) => (
-          <pre>
-            <code style={style}>
-              {tokens.map((line, i) => (
-                <div key={i} {...getLineProps({ line })}>
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token })} />
-                  ))}
-                </div>
-              ))}
-            </code>
-          </pre>
-        )}
-      </Highlight>
+        <div>
+          <label htmlFor="sizing">Sizing:</label>
+          <select
+            id="sizing"
+            value={settings.sizing}
+            onChange={(e) =>
+              onSettingsChange({
+                ...settings,
+                sizing: e.target.value as WidgetSettings["sizing"],
+              })
+            }
+          >
+            <option value="static">Static</option>
+            <option value="responsive">Responsive</option>
+          </select>
+        </div>
 
-      <h4>All Available Options</h4>
-      <Highlight
-        theme={themes.github}
-        code={`<!-- Responsive variants -->
-<img src="${getFeatureURL("responsive", option.value, "adaptive")}" alt="${getFeatureAlt(option.label)}" style="width: 100%; height: auto;" />
-<img src="${getFeatureURL("responsive", option.value, "light")}" alt="${getFeatureAlt(option.label)}" style="width: 100%; height: auto;" />
-<img src="${getFeatureURL("responsive", option.value, "dark")}" alt="${getFeatureAlt(option.label)}" style="width: 100%; height: auto;" />
+        <div>
+          <label htmlFor="format">Output Format:</label>
+          <select
+            id="format"
+            value={settings.format}
+            onChange={(e) =>
+              onSettingsChange({
+                ...settings,
+                format: e.target.value as WidgetSettings["format"],
+              })
+            }
+          >
+            <option value="html">HTML</option>
+            <option value="markdown">Markdown</option>
+          </select>
+        </div>
+      </div>
+    </>
+  );
+}
 
-<!-- Static variants -->
-<img src="${getFeatureURL("static", option.value, "adaptive")}" alt="${getFeatureAlt(option.label)}" />
-<img src="${getFeatureURL("static", option.value, "light")}" alt="${getFeatureAlt(option.label)}" />
-<img src="${getFeatureURL("static", option.value, "dark")}" alt="${getFeatureAlt(option.label)}" />`}
-        language="html"
-      >
-        {({ style, tokens, getLineProps, getTokenProps }) => (
-          <pre>
-            <code style={style}>
-              {tokens.map((line, i) => (
-                <div key={i} {...getLineProps({ line })}>
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token })} />
-                  ))}
-                </div>
-              ))}
-            </code>
-          </pre>
-        )}
-      </Highlight>
+function CodeExample({
+  option,
+  settings,
+}: {
+  option: Option;
+  settings: WidgetSettings;
+}) {
+  const widgetURL = getFeatureURL(
+    settings.sizing,
+    option.value,
+    settings.theme
+  );
+  const altText = getFeatureAlt(option.label);
 
-      <p>Markdown (recommended):</p>
-      <Highlight
-        theme={themes.github}
-        code={`![${getFeatureAlt(option.label)}](${getFeatureURL("responsive", option.value, "adaptive")})`}
-        language="markdown"
-      >
+  const htmlCode =
+    settings.sizing === "responsive"
+      ? `<img src="${widgetURL}" alt="${altText}" style="width: 100%; height: auto;" />`
+      : `<img src="${widgetURL}" alt="${altText}" />`;
+
+  const markdownCode = `![${altText}](${widgetURL})`;
+
+  const codeToShow = settings.format === "html" ? htmlCode : markdownCode;
+  const language = settings.format === "html" ? "html" : "markdown";
+
+  return (
+    <>
+      <h3>Generated Code</h3>
+      <p>
+        Copy this{" "}
+        <code>
+          <b>{settings.format}</b>
+        </code>{" "}
+        code to embed the widget:
+      </p>
+      <Highlight theme={themes.github} code={codeToShow} language={language}>
         {({ style, tokens, getLineProps, getTokenProps }) => (
           <pre>
             <code style={style}>
@@ -86,15 +131,35 @@ function CodeExample({ option }: { option: Option }) {
   );
 }
 
-function Preview({ option }: { option: Option }) {
+function Preview({
+  option,
+  settings,
+}: {
+  option: Option;
+  settings: WidgetSettings;
+}) {
+  const widgetURL = getFeatureURL(
+    settings.sizing,
+    option.value,
+    settings.theme
+  );
+  const altText = getFeatureAlt(option.label);
+
   return (
     <>
       <h3>Preview</h3>
-      <p>This is how the adaptive widget will appear in your project:</p>
+      <p>
+        This is how the {settings.theme} {settings.sizing} widget will appear:
+      </p>
+
       <img
-        alt={getFeatureAlt(option.label)}
-        src={getFeatureURL("responsive", option.value, "adaptive")}
-        style={{ width: "100%", height: "auto" }}
+        alt={altText}
+        src={widgetURL}
+        style={
+          settings.sizing === "responsive"
+            ? { width: "100%", height: "auto" }
+            : {}
+        }
       />
     </>
   );
@@ -103,9 +168,21 @@ function Preview({ option }: { option: Option }) {
 export function Search() {
   const options = suspend(getSearchOptions, []);
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+  const [settings, setSettings] = useState<WidgetSettings>({
+    theme: "adaptive",
+    sizing: "static",
+    format: "html",
+  });
 
   return (
-    <>
+    <div
+      style={{
+        background: "var(--background-alt)",
+        padding: 10,
+        borderRadius: 6,
+      }}
+    >
+      <h2 style={{ marginTop: 0 }}>Find Your Feature</h2>
       <label htmlFor="name">
         Search for any web platform feature to get its embeddable widget:
       </label>
@@ -121,10 +198,13 @@ export function Search() {
 
       {selectedOption ? (
         <>
-          <Preview option={selectedOption} />
-          <CodeExample option={selectedOption} />
+          <WidgetForm settings={settings} onSettingsChange={setSettings} />
+          <hr />
+          <Preview option={selectedOption} settings={settings} />
+          <hr />
+          <CodeExample option={selectedOption} settings={settings} />
         </>
       ) : null}
-    </>
+    </div>
   );
 }

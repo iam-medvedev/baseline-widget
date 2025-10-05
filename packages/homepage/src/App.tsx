@@ -27,12 +27,9 @@ export function App() {
         repository.
       </p>
 
-      <hr />
-      <h2>Find Your Feature</h2>
       <Suspense fallback={<p>Loading...</p>}>
         <Search />
       </Suspense>
-      <hr />
 
       <h2>Widget Options</h2>
       <p>Each feature now has 6 variants combining themes and sizing:</p>
@@ -41,7 +38,6 @@ export function App() {
       <ul>
         <li>
           <strong>Adaptive</strong> — Automatically adapts to system theme
-          (recommended)
         </li>
         <li>
           <strong>Light</strong> — Fixed light theme
@@ -62,7 +58,7 @@ export function App() {
       </ul>
 
       <h4>URL Examples</h4>
-      <p>Responsive Adaptive (recommended):</p>
+      <p>Responsive Adaptive:</p>
       <code>
         https://baseline.js.org/features/<i>FEATURE</i>/responsive-adaptive.svg
       </code>
