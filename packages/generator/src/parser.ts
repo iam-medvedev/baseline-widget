@@ -65,6 +65,7 @@ export async function parseFeature(featureId: string, page: Page) {
        */
       function processShadowRoot(shadowRoot: ShadowRoot) {
         const parentElement = shadowRoot.host;
+
         // Handle children shadow roots
         shadowRoot.querySelectorAll("*").forEach((el) => {
           if (!el.shadowRoot) {
@@ -81,6 +82,13 @@ export async function parseFeature(featureId: string, page: Page) {
           details.open = true;
         }
 
+        // Remove links
+        const links = shadowRoot.querySelectorAll("a");
+        links.forEach((link) => link.remove());
+
+        // Remove open-icon
+        shadowRoot.querySelector(".open-icon")?.remove();
+
         // Unwrap content
         parentElement.innerHTML = shadowRoot.innerHTML;
 
@@ -95,10 +103,6 @@ export async function parseFeature(featureId: string, page: Page) {
       // Process ShadowDOM's root
       processShadowRoot(shadowRoot);
 
-      // Remove links
-      const links = element.querySelectorAll("a");
-      links.forEach((link) => link.remove());
-
       // Add xmlns to all SVG elements
       const svgElements = element.querySelectorAll("svg");
       svgElements.forEach((svg) => {
@@ -106,9 +110,6 @@ export async function parseFeature(featureId: string, page: Page) {
           svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
         }
       });
-
-      // Remove open-icon
-      element.querySelector(".open-icon")?.remove();
 
       // Return HTML and sizes
       const html = element.outerHTML;
