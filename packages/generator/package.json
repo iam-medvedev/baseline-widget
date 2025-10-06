@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "baseline-status": "^1.0.11",
-    "playwright": "^1.55.1",
+    "playwright": "^1.56.0",
     "signale": "^1.4.0",
     "web-features": "^3.3.0"
   },
