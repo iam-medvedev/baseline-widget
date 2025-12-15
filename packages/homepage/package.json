@@ -9,7 +9,7 @@
     "prism-react-renderer": "^2.4.1",
     "react-dom": "^19.2.1",
     "react-select": "^5.10.2",
-    "react": "^19.2.1",
+    "react": "^19.2.3",
     "suspend-react": "^0.1.3",
     "water.css": "^2.1.1",
     "web-features": "^3.10.0"
