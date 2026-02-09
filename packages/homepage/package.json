@@ -15,7 +15,7 @@
     "web-features": "^3.14.0"
   },
   "devDependencies": {
-    "@types/react": "^19.2.10",
+    "@types/react": "^19.2.13",
     "@types/react-dom": "^19.2.3"
   }
 }
