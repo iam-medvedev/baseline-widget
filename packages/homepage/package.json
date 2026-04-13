@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "prism-react-renderer": "^2.4.1",
-    "react-dom": "^19.2.4",
+    "react-dom": "^19.2.5",
     "react-select": "^5.10.2",
     "react": "^19.2.4",
     "suspend-react": "^0.1.3",
