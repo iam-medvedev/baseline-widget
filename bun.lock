@@ -11,7 +11,7 @@
         "baseline-status": "^1.1.1",
         "playwright": "^1.62.0",
         "signale": "^1.4.0",
-        "web-features": "^3.34.0",
+        "web-features": "^3.34.2",
       },
       "devDependencies": {
         "@types/bun": "^1.3.14",
@@ -29,7 +29,7 @@
         "react-select": "^5.10.2",
         "suspend-react": "^0.1.3",
         "water.css": "^2.1.1",
-        "web-features": "^3.34.0",
+        "web-features": "^3.34.2",
       },
       "devDependencies": {
         "@types/react": "^19.2.17",
@@ -318,7 +318,7 @@
 
     "water.css": ["water.css@2.1.1", "", {}, "sha512-gkO5byC+pZ7ndEV18hs/RmxKoDtEZXx06tZU4ocI3IBdv4xV64tlhjIFbDjurysRnNkiy2oQTr8PakRyzZWPJw=="],
 
-    "web-features": ["web-features@3.34.0", "", {}, "sha512-hvIf75+7/1tlf1AAJHg64kMsvXDnx6gVRGWD6Q1uMjTNAQc0H1kPTra1VW0fGnm28gfudk89KY+14KiWC20EYQ=="],
+    "web-features": ["web-features@3.34.2", "", {}, "sha512-1/prthzNwl/ITxBgFuKUCJ1ezWxZDM8rhz/VIBCD6zMEv5STMDQxgf05IfYxmJvFBTTLONaTDUk7umPkhUHmpw=="],
 
     "yaml": ["yaml@1.10.2", "", {}, "sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg=="],
 
