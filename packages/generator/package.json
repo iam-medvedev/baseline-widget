@@ -5,7 +5,7 @@
     "build": "bun run ./src/generate.ts"
   },
   "dependencies": {
-    "baseline-status": "^1.1.1",
+    "baseline-status": "^1.2.0",
     "playwright": "^1.62.0",
     "signale": "^1.4.0",
     "web-features": "^3.34.2"
