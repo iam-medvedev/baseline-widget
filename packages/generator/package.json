@@ -11,7 +11,7 @@
     "web-features": "^3.37.0"
   },
   "devDependencies": {
-    "@types/bun": "^1.4.0",
+    "@types/bun": "^1.4.2",
     "@types/signale": "^1.4.7",
     "prettier": "^3.9.6",
     "typescript": "^7.0.2"
