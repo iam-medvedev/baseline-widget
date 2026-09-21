@@ -13,7 +13,7 @@
   "devDependencies": {
     "@types/bun": "^1.4.2",
     "@types/signale": "^1.4.7",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.8",
     "typescript": "^7.0.2"
   }
 }
